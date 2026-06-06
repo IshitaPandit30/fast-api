@@ -1,0 +1,19 @@
+from sqlalchemy import Column, Integer, String, VARCHAR, Boolean, DateTime
+
+from DateTime import datetime, timezone
+
+from ..db import Base
+
+class TodSchema(Base):
+    __tablename__ = "todos"
+
+    id= Column(Integer, primary_key=True, index=True, autoincrement=True)
+
+    content= Column(String, nullable=False)
+
+    is_complted = Column(Boolean, default=False, nullable=False)
+
+    created_at= Column(DateTime, nullable=False, default=datetime.now(timezone.utc))
+
+    updated_at= Column(DateTime, nullable=True, onupdate=datetime.now(timezone.utc))
+
