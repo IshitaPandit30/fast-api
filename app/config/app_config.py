@@ -1,15 +1,20 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-
 from functools import lru_cache
 
 class AppConfig(BaseSettings):
-    app_name:str="FASTAPI"
-    app_env:str="development"
-    database_url:str
+    app_name: str = "FASTAPI"
+    app_env: str = "development"
 
-    model_config=SettingsConfigDict(env_file=".env")
+    database_url: str
 
+    SECRET_KEY: str
+    ALGORITHM: str
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
 
-@lru_cache  #cache the result of this function so that it doesn't read the .env file multiple times
+    model_config = SettingsConfigDict(
+        env_file=".env"
+    )
+
+@lru_cache
 def getAppConfig():
     return AppConfig()
